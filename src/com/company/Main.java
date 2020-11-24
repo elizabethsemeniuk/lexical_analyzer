@@ -11,13 +11,16 @@ public class Main {
             System.out.println("Counter Type Lexema");
             //
             int cnt = 1;
-            while (!lex.flag) {
+            while (!lex.failed) {
                 lex.Read();
                 System.out.printf("%s %s %s\n", cnt, lex.type, lex.lex);
-                //fw.write(cnt);
-                //fw.write(lex.type.toString());
-                //fw.write(lex.lex.toString());
-                cnt++;
+                if (lex.type != C_Sharp.Type.Type_trash) {
+                    fw.write(lex.type.toString());
+                    fw.write(" - ");
+                    fw.write(lex.lex.toString());
+                    fw.write("\n");
+                    cnt++;
+                }
             }
             fw.close();
             if (lex.Error.isEmpty()) {

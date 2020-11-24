@@ -11,7 +11,7 @@ public class Lexema {
     private StringBuilder file = new StringBuilder();
     public C_Sharp.Type type;
     public String lex;
-    public boolean flag = false;
+    public boolean failed = false;
     public String Error = "";
     private Set<Character> st = new HashSet<Character>();
 
@@ -21,19 +21,19 @@ public class Lexema {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             Error = "Fail...";
-            flag = true;
+            failed = true;
             return;
         }
 
     }
 
     public void Read() {
-        if (flag) {
+        if (failed) {
             return;
         }
 
         if (file.length() == 0) {
-            flag = true;
+            failed = true;
             return;
         }
 
@@ -47,7 +47,7 @@ public class Lexema {
 
         if (lexem_find()) {
             if (file.length() == 0) {
-                flag = true; return;
+                failed = true; return;
             }
             return;
         } else {
@@ -68,7 +68,7 @@ public class Lexema {
                 lex += file.substring(0, 1);
                 file.delete(0, 1);
             }
-            flag = false;
+            failed = false;
             return;
         }
     }
